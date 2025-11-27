@@ -242,6 +242,14 @@ body {
     user-select: none;
 }
 
+.terms-notice {
+    color: #999999;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .name-modal-buttons {
     display: flex;
     justify-content: center;
