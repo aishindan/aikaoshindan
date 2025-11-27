@@ -243,7 +243,7 @@ body {
 }
 
 .terms-notice {
-    color: #999999;
+    color: #ffffff;
     font-size: 0.75rem;
     line-height: 1.5;
     margin-bottom: 20px;
@@ -448,6 +448,61 @@ body {
 }
 
 .terms-button:active {
+    transform: translateY(0);
+}
+
+.contact-info {
+    color: #999999;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-top: 15px;
+}
+
+.contact-link {
+    color: #6bb6ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-link:hover {
+    color: #4a90e2;
+    text-decoration: underline;
+}
+
+.contact-email {
+    color: #6bb6ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-email:hover {
+    color: #4a90e2;
+    text-decoration: underline;
+}
+
+.contact-button {
+    display: inline-block;
+    background: transparent;
+    color: #6bb6ff;
+    border: 2px solid #6bb6ff;
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+.contact-button:hover {
+    background-color: #6bb6ff;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 182, 255, 0.3);
+}
+
+.contact-button:active {
     transform: translateY(0);
 }
 
