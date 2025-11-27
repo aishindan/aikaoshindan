@@ -17,6 +17,10 @@ let result;
 let nameModal;
 let nameInput;
 let confirmNameButton;
+let termsButton;
+let termsModal;
+let closeTermsButton;
+let termsCheckbox;
 
 // DOMが読み込まれた後に実行
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     nameModal = document.getElementById('name-modal');
     nameInput = document.getElementById('name-input');
     confirmNameButton = document.getElementById('confirm-name');
+    termsButton = document.getElementById('terms-button');
+    termsModal = document.getElementById('terms-modal');
+    closeTermsButton = document.getElementById('close-terms');
+    termsCheckbox = document.getElementById('terms-checkbox');
     
     console.log('DOM要素の取得完了:', {
         startButton: !!startButton,
@@ -48,8 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nameModal) {
                 nameModal.classList.remove('hidden');
                 console.log('名前入力モーダルを表示しました');
+                // チェックボックスと名前入力をリセット
+                if (termsCheckbox) {
+                    termsCheckbox.checked = false;
+                }
                 if (nameInput) {
+                    nameInput.value = '';
                     nameInput.focus();
+                }
+                // 診断開始ボタンを無効化
+                if (confirmNameButton) {
+                    confirmNameButton.disabled = true;
                 }
             } else {
                 console.error('nameModalが見つかりません');
@@ -68,11 +85,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('お名前を入力してください。');
                 return;
             }
+            if (!termsCheckbox || !termsCheckbox.checked) {
+                alert('利用規約に同意してください。');
+                return;
+            }
             userName = inputName;
             if (nameModal) {
                 nameModal.classList.add('hidden');
             }
+            // チェックボックスをリセット
+            if (termsCheckbox) {
+                termsCheckbox.checked = false;
+            }
             startCamera();
+        });
+    }
+
+    // チェックボックスの状態に応じて診断開始ボタンの有効/無効を切り替え
+    if (termsCheckbox) {
+        termsCheckbox.addEventListener('change', () => {
+            if (confirmNameButton) {
+                const inputName = nameInput ? nameInput.value.trim() : '';
+                confirmNameButton.disabled = !termsCheckbox.checked || inputName === '';
+            }
+        });
+    }
+
+    // 名前入力欄の変更に応じて診断開始ボタンの有効/無効を切り替え
+    if (nameInput) {
+        nameInput.addEventListener('input', () => {
+            if (confirmNameButton && termsCheckbox) {
+                const inputName = nameInput.value.trim();
+                confirmNameButton.disabled = !termsCheckbox.checked || inputName === '';
+            }
         });
     }
 
@@ -83,6 +128,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (confirmNameButton) {
                     confirmNameButton.click();
                 }
+            }
+        });
+    }
+
+    // 利用規約ボタンのクリックイベント
+    if (termsButton) {
+        termsButton.addEventListener('click', () => {
+            if (termsModal) {
+                termsModal.classList.remove('hidden');
+            }
+        });
+    }
+
+    // 利用規約モーダルを閉じる
+    if (closeTermsButton) {
+        closeTermsButton.addEventListener('click', () => {
+            if (termsModal) {
+                termsModal.classList.add('hidden');
+            }
+        });
+    }
+
+    // モーダル外をクリックで閉じる
+    if (termsModal) {
+        termsModal.addEventListener('click', (e) => {
+            if (e.target === termsModal) {
+                termsModal.classList.add('hidden');
             }
         });
     }

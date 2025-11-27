@@ -82,8 +82,12 @@
                     <h2 class="name-modal-title">お名前を入力してください</h2>
                     <p class="name-modal-description">ニックネームまたは本名を入力してください</p>
                     <input type="text" id="name-input" class="name-input" placeholder="お名前を入力" maxlength="50">
+                    <div class="terms-checkbox-container">
+                        <input type="checkbox" id="terms-checkbox" class="terms-checkbox">
+                        <label for="terms-checkbox" class="terms-checkbox-label">利用規約に同意しますか？</label>
+                    </div>
                     <div class="name-modal-buttons">
-                        <button id="confirm-name" class="confirm-name-btn">診断開始</button>
+                        <button id="confirm-name" class="confirm-name-btn" disabled>診断開始</button>
                     </div>
                 </div>
             </div>
@@ -110,8 +114,26 @@
         <!-- フッター -->
         <footer class="footer">
             <p class="disclaimer">※この診断はAIによる分析結果であり、医学的根拠に基づくものではありません</p>
-            <p class="disclaimer">診断した画像は利用される可能性があります。</p>
+            <button id="terms-button" class="terms-button">利用規約</button>
         </footer>
+
+        <!-- 利用規約モーダル -->
+        <div id="terms-modal" class="terms-modal hidden">
+            <div class="terms-modal-content">
+                <h2 class="terms-modal-title">利用規約</h2>
+                <div class="terms-content">
+                    <h3 class="terms-article-title">第1条（投稿データの第三者への公開）</h3>
+                    <p class="terms-text">ユーザーは、本サービスを利用してアップロードした画像および生成された診断結果が、当社の運営するDiscordサーバー、SNS、ウェブサイト等において、不特定多数の第三者が閲覧可能な状態で公開されることに予め同意するものとします。</p>
+                    <p class="terms-text">ユーザーは、当該画像について、肖像権、プライバシー権、パブリシティ権を行使しないものとします。</p>
+                    <p class="terms-text">公開された画像は、インターネットの性質上、第三者によって保存・転載されるリスクがあることをユーザーは理解し、これを承諾したものとみなします。</p>
+                    <h3 class="terms-article-title">第2条（同意）</h3>
+                    <p class="terms-text">無料で診断開始を押したことで以上の利用規約に同意したものとみなします。</p>
+                </div>
+                <div class="terms-modal-buttons">
+                    <button id="close-terms" class="close-terms-btn">閉じる</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
