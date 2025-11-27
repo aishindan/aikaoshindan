@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI顔偏差値診断</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- メインバナー -->
+        <div class="main-banner">
+            <h1 class="main-title">AI顔偏差値診断</h1>
+            <p class="subtitle">最新AI技術であなたの顔のバランスを分析</p>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="content-section">
+            <h2 class="section-title">あなたの顔の偏差値を診断</h2>
+            <p class="section-description">AIが顔のバランスを分析し、総合評価をお伝えします</p>
+
+            <!-- 機能ハイライト -->
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon chart-icon">📊</div>
+                    <h3 class="feature-title">総合評価</h3>
+                    <p class="feature-description">60~100点で評価</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon lightning-icon">⚡</div>
+                    <h3 class="feature-title">高速診断</h3>
+                    <p class="feature-description">たった5秒で完了</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon lock-icon">🔒</div>
+                    <h3 class="feature-title">プライバシー</h3>
+                    <p class="feature-description">データは即時削除</p>
+                </div>
+            </div>
+
+            <!-- 使い方セクション -->
+            <div class="how-to-section">
+                <h2 class="how-to-title">使い方</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <p class="step-title">診断開始ボタンを押す</p>
+                            <p class="step-description">カメラの使用を許可してください</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <p class="step-title">顔を枠内に合わせる</p>
+                            <p class="step-description">正面を向いて自然な表情で</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <p class="step-title">結果を確認</p>
+                            <p class="step-description">AIが詳細に分析します</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カメラビュー（非表示） -->
+            <div id="camera-view" class="camera-view hidden">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas" class="hidden"></canvas>
+                <div class="face-frame"></div>
+                <div class="camera-controls">
+                    <button id="stop-recording" class="stop-btn">停止</button>
+                </div>
+            </div>
+
+            <!-- 名前入力モーダル -->
+            <div id="name-modal" class="name-modal hidden">
+                <div class="name-modal-content">
+                    <h2 class="name-modal-title">お名前を入力してください</h2>
+                    <p class="name-modal-description">ニックネームまたは本名を入力してください</p>
+                    <input type="text" id="name-input" class="name-input" placeholder="お名前を入力" maxlength="50">
+                    <div class="name-modal-buttons">
+                        <button id="confirm-name" class="confirm-name-btn">診断開始</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 診断開始ボタン -->
+            <button id="start-diagnosis" class="start-button">無料で診断開始</button>
+
+            <!-- ローディング表示 -->
+            <div id="loading" class="loading hidden">
+                <p>診断中...</p>
+            </div>
+
+            <!-- 結果表示 -->
+            <div id="result" class="result hidden">
+                <h2 class="result-title">診断結果</h2>
+                <div class="score-display">
+                    <span class="score-value" id="score-value">0</span>
+                    <span class="score-unit">点</span>
+                </div>
+                <p class="result-message" id="result-message"></p>
+            </div>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <p class="disclaimer">※この診断はAIによる分析結果であり、医学的根拠に基づくものではありません</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
