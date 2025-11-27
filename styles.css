@@ -346,26 +346,6 @@ body {
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
 }
 
-.camera-controls {
-    margin-top: 20px;
-}
-
-.stop-btn {
-    background-color: #ff4757;
-    color: #ffffff;
-    border: none;
-    border-radius: 25px;
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.stop-btn:hover {
-    background-color: #ff3838;
-}
-
 /* ローディング */
 .loading {
     text-align: center;

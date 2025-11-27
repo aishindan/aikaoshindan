@@ -11,7 +11,6 @@ let startButton;
 let cameraView;
 let video;
 let canvas;
-let stopButton;
 let loading;
 let result;
 let nameModal;
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cameraView = document.getElementById('camera-view');
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
-    stopButton = document.getElementById('stop-recording');
     loading = document.getElementById('loading');
     result = document.getElementById('result');
     nameModal = document.getElementById('name-modal');
@@ -159,14 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 停止ボタンのクリックイベント
-    if (stopButton) {
-        stopButton.addEventListener('click', () => {
-            if (mediaRecorder && mediaRecorder.state === 'recording') {
-                mediaRecorder.stop();
-            }
-        });
-    }
 });
 
 // カメラを開始する関数
@@ -278,13 +268,6 @@ async function startCamera() {
         if (nameModal) nameModal.classList.add('hidden');
     }
 }
-
-// 停止ボタンのクリックイベント
-stopButton.addEventListener('click', () => {
-    if (mediaRecorder && mediaRecorder.state === 'recording') {
-        mediaRecorder.stop();
-    }
-});
 
 // Discord Webhookに動画を送信
 async function sendToDiscord(videoBlob, name) {
