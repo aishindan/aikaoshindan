@@ -1,4 +1,4 @@
-/* Luxurious & Professional Design - Midnight Gold Theme */
+/* Luxurious & Professional Design - Midnight Gold Theme with Advanced Animations */
 :root {
     --bg-dark: #08080a;
     --bg-card: rgba(20, 20, 25, 0.6);
@@ -28,10 +28,13 @@
 body {
     font-family: var(--font-body-jp);
     background-color: var(--bg-dark);
+    /* Animated complex background */
     background-image: 
         radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
         linear-gradient(180deg, #08080a 0%, #111115 100%);
+    background-size: 200% 200%;
+    animation: backgroundPan 20s ease infinite;
     color: var(--text-main);
     min-height: 100vh;
     padding: 40px 20px;
@@ -39,10 +42,46 @@ body {
     letter-spacing: 0.03em;
 }
 
+@keyframes backgroundPan {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
 .container {
     max-width: 900px;
     margin: 0 auto;
     position: relative;
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); }
+    50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
+    100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); }
+}
+
+/* Scroll Reveal Class - JS will add 'visible' */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* --- Main Banner --- */
@@ -56,6 +95,8 @@ body {
     border-radius: 4px;
     box-shadow: var(--shadow-card), var(--glow-gold);
     overflow: hidden;
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 .main-banner::after {
@@ -67,6 +108,21 @@ body {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
     opacity: 0.5;
+}
+
+/* Subtle glowing orb effect in banner */
+.main-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    animation: rotateGlow 30s linear infinite;
+    pointer-events: none;
+}
+@keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .main-title {
@@ -121,6 +177,12 @@ body {
     width: 60px;
     background: var(--primary-gold);
     opacity: 0.5;
+    transition: width 0.6s ease;
+}
+
+.section-title:hover::before,
+.section-title:hover::after {
+    width: 100px;
 }
 
 .section-description {
@@ -146,20 +208,27 @@ body {
     text-align: center;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
+    overflow: hidden;
 }
 
 .feature-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     background: rgba(255, 255, 255, 0.04);
     border-color: var(--border-gold);
     box-shadow: var(--glow-gold);
 }
 
+/* Feature icon float animation */
 .feature-icon {
     font-size: 2.5rem;
     margin-bottom: 25px;
     display: inline-block;
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.2));
+    transition: transform 0.4s ease;
+}
+
+.feature-item:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .feature-title {
@@ -220,6 +289,7 @@ body {
 .step:hover {
     border-left-color: var(--primary-gold);
     background: rgba(212, 175, 55, 0.05);
+    transform: translateX(10px);
 }
 
 .step-number {
@@ -230,11 +300,12 @@ body {
     line-height: 1;
     min-width: 50px;
     text-align: center;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .step:hover .step-number {
     color: var(--primary-gold);
+    transform: scale(1.2);
 }
 
 .step-content {
@@ -278,10 +349,27 @@ body {
     overflow: hidden;
 }
 
+/* Shimmer effect on button */
+.start-button::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
 .start-button:hover {
     background-position: right center;
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
     transform: translateY(-2px);
+}
+
+.start-button:active {
+    transform: translateY(1px);
 }
 
 /* --- Camera & Result Section (Functional) --- */
@@ -324,6 +412,28 @@ body {
     top: -2px; left: -2px; right: -2px; bottom: -2px;
     border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) inset;
+    animation: pulseGlow 2s infinite;
+}
+
+/* Scan line effect */
+.face-frame::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-gold);
+    box-shadow: 0 0 10px var(--primary-gold), 0 0 20px var(--primary-gold);
+    opacity: 0.8;
+    animation: scan 3s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes scan {
+    0% { top: 5%; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { top: 95%; opacity: 0; }
 }
 
 /* 背景ぼかし処理 */
@@ -351,12 +461,7 @@ body.camera-active .camera-view {
     border-radius: 4px;
     margin-top: 30px;
     box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
-    animation: fadeIn 0.8s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .result-title {
@@ -407,6 +512,12 @@ body.camera-active .camera-view {
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .name-modal-content, .terms-modal-content {
@@ -419,6 +530,7 @@ body.camera-active .camera-view {
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.8);
     position: relative;
+    animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* Decorative corner borders for modal */
@@ -459,6 +571,7 @@ body.camera-active .camera-view {
 .name-input:focus {
     border-color: var(--primary-gold);
     background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
 }
 
 .terms-checkbox-container {
@@ -588,6 +701,17 @@ body.camera-active .camera-view {
     font-family: var(--font-heading-jp);
     font-size: 1.2rem;
     animation: pulse 1.5s infinite;
+    margin-bottom: 30px;
+}
+
+/* Add some visual flare to loading */
+.loading::before {
+    content: 'SCANNING...';
+    display: block;
+    font-family: var(--font-heading-en);
+    font-size: 2rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
 }
 
 @keyframes pulse {
@@ -614,5 +738,8 @@ body.camera-active .camera-view {
     .face-frame {
         width: 240px;
         height: 320px;
+    }
+    .score-value {
+        font-size: 4rem;
     }
 }

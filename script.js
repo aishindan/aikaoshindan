@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmNameButton: !!confirmNameButton
     });
 
+    // Initialize Scroll Animations
+    initScrollAnimations();
+
     // 診断開始ボタンのクリックイベント
     if (startButton) {
         startButton.addEventListener('click', () => {
@@ -158,6 +161,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// Initialize Intersection Observer for scroll animations
+function initScrollAnimations() {
+    // Add animation classes to elements
+    const animatableElements = document.querySelectorAll('.feature-item, .step, .how-to-section, .content-section p, .content-section h2');
+    
+    animatableElements.forEach(el => {
+        el.classList.add('reveal-on-scroll');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+}
 
 // カメラを開始する関数
 async function startCamera() {
@@ -354,4 +382,3 @@ function displayResult(score) {
     
     messageElement.textContent = message;
 }
-
