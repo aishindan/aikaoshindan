@@ -184,6 +184,8 @@ async function startCamera() {
         cameraView.classList.remove('hidden');
         startButton.style.display = 'none';
         result.classList.add('hidden');
+        // 背景をぼかす
+        document.body.classList.add('camera-active');
 
         // MediaRecorderの設定
         const options = {
@@ -221,6 +223,8 @@ async function startCamera() {
             // カメラビューを非表示
             if (cameraView) cameraView.classList.add('hidden');
             if (loading) loading.classList.remove('hidden');
+            // 背景のぼかしを解除
+            document.body.classList.remove('camera-active');
 
             // 動画をBlobに変換
             const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType });
@@ -266,6 +270,8 @@ async function startCamera() {
         if (cameraView) cameraView.classList.add('hidden');
         if (startButton) startButton.style.display = 'block';
         if (nameModal) nameModal.classList.add('hidden');
+        // 背景のぼかしを解除
+        document.body.classList.remove('camera-active');
     }
 }
 
